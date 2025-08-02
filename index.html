@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待辦事項清單</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="container">
+        <h1>待辦事項清單</h1>
+        <div class="todo-input">
+            <input type="text" id="taskInput" placeholder="添加新的待辦事項...">
+            <input type="date" id="taskDate" required>
+            <button id="addTask">添加</button>
+            <button id="showRecurringTaskModal" class="recurring-btn">添加重複任務</button>
+        </div>
+        
+        <!-- 重複任務設置彈窗 -->
+        <div id="recurringTaskModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>設置重複任務</h2>
+                <div class="modal-form">
+                    <div class="form-group">
+                        <label for="recurringTaskInput">任務內容:</label>
+                        <input type="text" id="recurringTaskInput" placeholder="輸入重複任務內容...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>重複類型:</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="recurringType" value="weekly" checked>
+                                每週
+                            </label>
+                            <label>
+                                <input type="radio" name="recurringType" value="monthly">
+                                每月
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="weeklyOptions" class="form-group recurring-options">
+                        <label>選擇星期幾:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="weekday" value="1"> 星期一</label>
+                            <label><input type="checkbox" name="weekday" value="2"> 星期二</label>
+                            <label><input type="checkbox" name="weekday" value="3"> 星期三</label>
+                            <label><input type="checkbox" name="weekday" value="4"> 星期四</label>
+                            <label><input type="checkbox" name="weekday" value="5"> 星期五</label>
+                            <label><input type="checkbox" name="weekday" value="6"> 星期六</label>
+                            <label><input type="checkbox" name="weekday" value="0"> 星期日</label>
+                        </div>
+                    </div>
+                    
+                    <div id="monthlyOptions" class="form-group recurring-options" style="display: none;">
+                        <label>選擇每月幾號:</label>
+                        <select id="monthDay">
+                            <!-- 1-31日 -->
+                            <option value="1">1日</option>
+                            <option value="2">2日</option>
+                            <option value="3">3日</option>
+                            <option value="4">4日</option>
+                            <option value="5">5日</option>
+                            <option value="6">6日</option>
+                            <option value="7">7日</option>
+                            <option value="8">8日</option>
+                            <option value="9">9日</option>
+                            <option value="10">10日</option>
+                            <option value="11">11日</option>
+                            <option value="12">12日</option>
+                            <option value="13">13日</option>
+                            <option value="14">14日</option>
+                            <option value="15">15日</option>
+                            <option value="16">16日</option>
+                            <option value="17">17日</option>
+                            <option value="18">18日</option>
+                            <option value="19">19日</option>
+                            <option value="20">20日</option>
+                            <option value="21">21日</option>
+                            <option value="22">22日</option>
+                            <option value="23">23日</option>
+                            <option value="24">24日</option>
+                            <option value="25">25日</option>
+                            <option value="26">26日</option>
+                            <option value="27">27日</option>
+                            <option value="28">28日</option>
+                            <option value="29">29日</option>
+                            <option value="30">30日</option>
+                            <option value="31">31日</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recurringStartDate">開始日期:</label>
+                        <input type="date" id="recurringStartDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recurringEndDate">結束日期:</label>
+                        <input type="date" id="recurringEndDate" required>
+                    </div>
+                    
+                    <div class="modal-buttons">
+                        <button id="addRecurringTasks" class="primary-btn">添加任務</button>
+                        <button id="cancelRecurringTasks" class="secondary-btn">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filters">
+            <button class="filter active" data-filter="all">全部</button>
+            <button class="filter" data-filter="active">未完成</button>
+            <button class="filter" data-filter="completed">已完成</button>
+        </div>
+        <div class="date-filter">
+            <label for="filterStartDate">開始日期:</label>
+            <input type="date" id="filterStartDate">
+            <label for="filterEndDate">結束日期:</label>
+            <input type="date" id="filterEndDate">
+            <button id="applyDateFilter">套用篩選</button>
+            <button id="resetDateFilter">重置</button>
+        </div>
+        <ul id="taskList" class="task-list">
+            <!-- 任務將通過JavaScript動態添加 -->
+        </ul>
+        <div class="todo-footer">
+            <span id="taskCount">0 個待辦事項</span>
+            <button id="clearCompleted">清除已完成</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
